@@ -43,20 +43,27 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("Data Member"),
       ),
-      body: FutureBuilder<List<Member>>(
-        future: future,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            if(snapshot.data.length > 0){
-              return Column(
-                  children: snapshot.data.map((todo) => cardo(todo)).toList());
-            } else {
-              return body();
-            }
-          } else {
-            return body();
-          }
-        },
+      body: Container(
+        child: ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            FutureBuilder<List<Member>>(
+              future: future,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  if(snapshot.data.length > 0){
+                    return Column(
+                        children: snapshot.data.map((todo) => cardo(todo)).toList());
+                  } else {
+                    return body();
+                  }
+                } else {
+                  return body();
+                }
+              },
+            ),
+          ],
+        ),
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
